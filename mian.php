@@ -1,12 +1,12 @@
 <?php
 /**
+ * 小米路由重新拨号
  * Created by cqqh
  * Date: 2016/8/10 11:19
  */
 
 
-//登录获取 token
-
+//config 配置后才能使用
 $_config = [
     'key' => 'a2ffa5c9be07488bbb04a3a47d3c5f6a',    //路由器key，路由器登录页 var Encrypt 查看
     'deviceId' => 'b8:27:eb:f2:8d:f7',              //路由器deviceId，路由器登录页 var Encrypt 下 nonceCreat 查看
@@ -36,7 +36,7 @@ $json = http_request($_config['route_url'].LOGIN_URL, false, $param);
 $res = json_decode($json, true);
 
 if($res['code'] == 0) {
-    #http_request($_config['route_url'].'/cgi-bin/luci/;stok='.$res["token"].'/api/xqnetwork/pppoe_stop');
+    http_request($_config['route_url'].'/cgi-bin/luci/;stok='.$res["token"].'/api/xqnetwork/pppoe_stop');
     sleep(3);
     echo http_request($_config['route_url'].'/cgi-bin/luci/;stok='.$res["token"].'/api/xqnetwork/pppoe_start');
     sleep(3);
